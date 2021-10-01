@@ -1,3 +1,5 @@
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useState } from "react";
 import { KeyboardAvoidingView, Platform, SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native";
 import { Button } from "../components/Button";
@@ -9,6 +11,14 @@ export function UserIdentification() {
     const [isFocused, setIsFocused] = useState(false)
     const [isFilled, setIsFilled] = useState(false)
     const [name, setName] = useState<string>()
+
+    const navigation: StackNavigationProp<any, any> = useNavigation();
+
+    function handleSubmit() {
+        if(isFilled) {
+            navigation.navigate('Confirmation')
+        }
+    }
 
     function handleInputBlur() {
         setIsFocused(false)
@@ -51,7 +61,7 @@ export function UserIdentification() {
                             onChangeText={handleInputChange}
                         />
                         <View style={styles.footer}>
-                            <Button />
+                            <Button title="Confirmar" onPress={handleSubmit}/>
                         </View>
                     </View>
                 </View>

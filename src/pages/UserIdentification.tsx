@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useState } from "react";
-import { KeyboardAvoidingView, Platform, SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native";
+import { Alert, KeyboardAvoidingView, Platform, SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native";
 import { Button } from "../components/Button";
 import colors from "../styles/colors";
 import fonts from "../styles/fonts";
@@ -15,9 +15,10 @@ export function UserIdentification() {
     const navigation: StackNavigationProp<any, any> = useNavigation();
 
     function handleSubmit() {
-        if(isFilled) {
-            navigation.navigate('Confirmation')
-        }
+
+        if(!isFilled) return Alert.alert('Me diz como chamar você 😥');
+
+        navigation.navigate('Confirmation')
     }
 
     function handleInputBlur() {
